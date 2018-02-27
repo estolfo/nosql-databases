@@ -24,6 +24,11 @@ Vagrant.configure("2") do |config|
     server.vm.provision :shell, path: "cassandra/bootstrap.sh"
   end
 
+  config.vm.define "redis" do |server|
+    server.vm.synced_folder "redis/", "/vagrant"
+    server.vm.provision :shell, path: "redis/bootstrap.sh"
+  end
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
