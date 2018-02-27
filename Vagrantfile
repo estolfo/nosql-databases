@@ -1,6 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+VAGRANT_BOX_CONFIG = YAML.load_file(File.expand_path('../vagrant_boxes/config.yml', __FILE__));
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -14,19 +16,11 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/xenial64"
 
-  config.vm.define "mongodb" do |server|
-    server.vm.synced_folder "mongodb/", "/vagrant"
-    server.vm.provision :shell, path: "mongodb/bootstrap.sh"
-  end
-
-  config.vm.define "cassandra" do |server|
-    server.vm.synced_folder "cassandra/", "/vagrant"
-    server.vm.provision :shell, path: "cassandra/bootstrap.sh"
-  end
-
-  config.vm.define "redis" do |server|
-    server.vm.synced_folder "redis/", "/vagrant"
-    server.vm.provision :shell, path: "redis/bootstrap.sh"
+  VAGRANT_BOX_CONFIG["boxes"].each do |server_name|
+    config.vm.define server_name do |server|
+      server.vm.synced_folder "#{server_name}/", "/vagrant"
+      server.vm.provision :shell, path: "#{server_name}/bootstrap.sh"
+    end
   end
 
   # Disable automatic box update checking. If you disable this, then
