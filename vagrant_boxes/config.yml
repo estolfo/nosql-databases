@@ -2,3 +2,4 @@ boxes:
   - mongodb
   - cassandra
   - redis
+  - neo4j
