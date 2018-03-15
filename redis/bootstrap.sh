@@ -23,11 +23,10 @@ function install_java_8() {
 
 function install_redis() {
   apt-get update
-  apt-get install -y redis-server
+  apt-get install -y redis-tools
 }
 
-
-#install_nodejs
+install_nodejs
 install_rvm_and_ruby
 install_redis
 

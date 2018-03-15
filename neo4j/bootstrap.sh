@@ -39,8 +39,8 @@ function setup_python {
   apt-get install -y python-pip
 }
 
-#install_nodejs
-#install_rvm_and_ruby
+install_nodejs
+install_rvm_and_ruby
 setup_python
 install_java_8
 install_neo4j
