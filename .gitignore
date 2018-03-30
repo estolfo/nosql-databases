@@ -217,3 +217,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+########## REDIS #############
+*.rdb
