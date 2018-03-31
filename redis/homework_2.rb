@@ -6,14 +6,12 @@ VOTE_SCORE = 432
 def article_vote(redis, user, article)
   cutoff = Time.now - ONE_WEEK_IN_SECONDS
 
-  # if Time.at(redis.zscore('time:', article)) < cutoff
-  #   return
-  # end
-
-  article_id = article.split(':')[-1]
-  if redis.sadd('voted:' + article_id, user)
-    redis.zincrby('score:', VOTE_SCORE, article)
-    redis.hincrby(article, 'votes', 1)
+  unless Time.at(redis.zscore('time:', article)) < cutoff
+    article_id = article.split(':')[-1]
+    if redis.sadd('voted:' + article_id, user)
+      redis.zincrby('score:', VOTE_SCORE, article)
+      redis.hincrby(article, 'votes', 1)
+    end
   end
 end
 
