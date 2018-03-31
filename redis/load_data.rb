@@ -8,6 +8,8 @@ SCORES_FILE = "data/scores.json"
 VOTES_FILE = "data/votes.json"
 
 def setup_data(redis)
+  redis.flushall
+
   articles_file = File.new(ARTICLES_FILE)
   articles = JSON.load(ERB.new(articles_file.read).result)
   articles.each_with_index do |article, id|
