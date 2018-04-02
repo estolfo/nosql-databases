@@ -26,7 +26,13 @@ function install_redis() {
   apt-get install -y redis-tools
 }
 
+function setup_python {
+  apt-get update
+  apt-get install -y python-pip
+}
+
 install_nodejs
 install_rvm_and_ruby
+setup_python
 install_redis
 

@@ -32,8 +32,13 @@ function install_cassandra() {
   apt-get install -y cassandra
 }
 
+function setup_python {
+  apt-get update
+  apt-get install -y python-pip
+}
 
 install_nodejs
 install_rvm_and_ruby
 install_java_8
+setup_python
 install_cassandra
