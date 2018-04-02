@@ -30,5 +30,5 @@ article_switch_vote(redis, "user:2", "article:8", "article:1")
 # PRINT THE ARTICLE'S LINK TO STDOUT:
 # HOMEWORK 2 Part II
 # article = redis.?
-# print(redis.?)
+# print redis.?
 
