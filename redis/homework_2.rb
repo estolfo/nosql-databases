@@ -15,15 +15,20 @@ def article_vote(redis, user, article)
   end
 end
 
-#redis = Redis.new
-#article_vote(redis, "user:5", "article:0")
-
-
-def article_downvote(redis, user, article)
-  # HOMEWORK 2
+def article_switch_vote(redis, user, from_article, to_article)
+  # HOMEWORK 2 Part I
 end
 
-# user x down votes article y
-# user m down votes article y
-# user n up votes article x
-# zrange command to find "Easter egg" article
+redis = Redis.new
+# user:3 up votes article:1
+article_vote(redis, "user:3", "article:1")
+# user:3 up votes article:3
+article_vote(redis, "user:3", "article:3")
+# user:5 switches their vote from article:1 to article:0
+article_switch_vote(redis, "user:2", "article:8", "article:1")
+
+# Which article's score is between 10 and 20?
+# PRINT THE ARTICLE'S LINK TO STDOUT:
+# HOMEWORK 2 Part II
+# article = redis.?
+# puts redis.?

@@ -1,4 +1,8 @@
 {
   "article:0": [ "user:0", "user:3"],
-  "article:1": [ "user:2", "user:3"]
+  "article:1": [ "user:5"],
+  "article:2": [ "user:4", "user:3"],
+  "article:3": [ "user:2", "user:3", "user:6"],
+  "article:8": [ "user:2"],
+  "article:9": [ "user:0", "user:3"]
 }

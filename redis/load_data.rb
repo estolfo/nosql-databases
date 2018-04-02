@@ -1,6 +1,4 @@
 require 'redis'
-require 'erb'
-require 'pry-nav'
 require 'json'
 
 ARTICLES_FILE = "data/articles.json"
@@ -11,7 +9,7 @@ def setup_data(redis)
   redis.flushall
 
   articles_file = File.new(ARTICLES_FILE)
-  articles = JSON.load(ERB.new(articles_file.read).result)
+  articles = JSON.load(articles_file.read)
   articles.each_with_index do |article, id|
     article.each do |k, v|
       redis.hset("article:#{id}", k, v)
@@ -25,14 +23,14 @@ def setup_data(redis)
 
   # set up score zset (the scores that the articles have), key is score:
   scores_file = File.new(SCORES_FILE)
-  scores = JSON.load(ERB.new(scores_file.read).result)
+  scores = JSON.load(scores_file)
   scores.each do |article, score|
     redis.zadd("score:", score, article)
   end
 
   # set up set, key is "voted:<article number>", values are user:<user id>
   votes_files = File.new(VOTES_FILE)
-  votes = JSON.load(ERB.new(votes_files.read).result)
+  votes = JSON.load(votes_files)
 
   votes.each do |article, users|
     article_id = article.split(':')[-1]
