@@ -24,7 +24,13 @@ function install_nodejs() {
   apt-get install -y nodejs
 }
 
+function setup_python {
+  apt-get update
+  apt-get install -y python-pip
+}
+
 install_nodejs
 install_rvm_and_ruby
+setup_python
 install_mongodb
 setup_mongodb
