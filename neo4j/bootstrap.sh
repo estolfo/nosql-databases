@@ -33,7 +33,6 @@ function install_neo4j() {
   chown vagrant:vagrant /var/run/neo4j
 }
 
-
 function setup_python {
   apt-get update
   apt-get install -y python-pip
