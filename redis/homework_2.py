@@ -10,7 +10,7 @@ def article_vote(redis, user, article):
 
     if not datetime.datetime.fromtimestamp(redis.zscore('time:', article)) < cutoff:
         article_id = article.split(':')[-1]
-        if redis.sadd('voted:' + artical_id, user):
+        if redis.sadd('voted:' + article_id, user):
             redis.zincrby('score:', VOTE_SCORE, article)
             reids.hincrby(article, 'votes', 1)
 
