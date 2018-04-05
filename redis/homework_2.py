@@ -3,7 +3,7 @@ import datetime
 
 
 ONE_WEEK_IN_SECONDS = 7 * 86400
-VOTE_SCORE = 432.0
+VOTE_SCORE = 432
 
 def article_vote(redis, user, article):
     cutoff = datetime.datetime.now() - datetime.timedelta(seconds=ONE_WEEK_IN_SECONDS)
@@ -11,8 +11,8 @@ def article_vote(redis, user, article):
     if not datetime.datetime.fromtimestamp(redis.zscore('time:', article)) < cutoff:
         article_id = article.split(':')[-1]
         if redis.sadd('voted:' + article_id, user):
-            redis.zincrby('score:', VOTE_SCORE, article)
-            reids.hincrby(article, 'votes', 1)
+            redis.zincrby(name='score:', value=article, amount=VOTE_SCORE)
+            reids.hincrby(name=article, value='votes', amount=1)
 
 def article_switch_vote(redis, user, from_article, to_article):
     # HOMEWORK 2 Part I
