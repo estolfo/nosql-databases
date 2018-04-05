@@ -3,7 +3,7 @@ import datetime
 
 
 ONE_WEEK_IN_SECONDS = 7 * 86400
-VOTE_SCORE = 432
+VOTE_SCORE = 432.0
 
 def article_vote(redis, user, article):
     cutoff = datetime.datetime.now() - datetime.timedelta(seconds=ONE_WEEK_IN_SECONDS)
