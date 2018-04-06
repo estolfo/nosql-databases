@@ -12,7 +12,7 @@ def article_vote(redis, user, article):
         article_id = article.split(':')[-1]
         if redis.sadd('voted:' + article_id, user):
             redis.zincrby(name='score:', value=article, amount=VOTE_SCORE)
-            reids.hincrby(name=article, value='votes', amount=1)
+            redis.hincrby(name=article, key='votes', amount=1)
 
 def article_switch_vote(redis, user, from_article, to_article):
     # HOMEWORK 2 Part I
