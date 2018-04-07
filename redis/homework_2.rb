@@ -24,7 +24,7 @@ redis = Redis.new
 article_vote(redis, "user:3", "article:1")
 # user:3 up votes article:3
 article_vote(redis, "user:3", "article:3")
-# user:5 switches their vote from article:1 to article:0
+# user:2 switches their vote from article:8 to article:1
 article_switch_vote(redis, "user:2", "article:8", "article:1")
 
 # Which article's score is between 10 and 20?

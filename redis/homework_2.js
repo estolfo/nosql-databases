@@ -26,7 +26,7 @@ var client = redis.createClient();
 article_vote(client, "user:3", "article:1")
 // user:3 up votes article:3
 article_vote(client, "user:3", "article:3")
-// user:5 switches their vote from article:1 to article:0
+// user:2 switches their vote from article:8 to article:1
 article_switch_vote(client, "user:2", "article:8", "article:1")
 client.quit();
 
