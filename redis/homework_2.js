@@ -13,13 +13,17 @@ function article_vote(client, user, article) {
 		// Add to set if within time frame
 		if (! (1000*article_time < cutoff)) {
 	        var article_id = article.split(':')[1];
-			client.sadd('voted:' + article_id, user, function(err, numAdded){
 
+			client.sadd('voted:' + article_id, user, function(err, numAdded){
+				if(err){
+					console.log("error is " + err);
+					return;
+				}
+				
 				// On successful addition, increment other data				
-				if(numAddded){
-					console.log("ARTICLE_VOTE: Num added is: " + numAdded);
+				if(numAdded){
 					client.zincrby('score:', VOTE_SCORE, article);
-	            	client.hincrby(articl, 'votes', 1);
+	            	client.hincrby(article, 'votes', 1);
 				}
 			});
 	    }		
@@ -44,11 +48,11 @@ client.on("connect", function () {
     console.log("Connection made... ");
 
 	// user:3 up votes article:1
-	article_vote(client, "user:3", "article:1")
+	article_vote(client, "user:3", "article:1");
 	// user:3 up votes article:3
-	article_vote(client, "user:3", "article:3")
+	article_vote(client, "user:3", "article:3");
 	// user:2 switches their vote from article:8 to article:1
-	article_switch_vote(client, "user:2", "article:8", "article:1")
+	article_switch_vote(client, "user:2", "article:8", "article:1");
 
 	// Which article's score is between 10 and 20?
 	// PRINT THE ARTICLE'S LINK TO STDOUT:
@@ -57,8 +61,8 @@ client.on("connect", function () {
 
 		// print client.?	
 
-		// NOTE/HINT: This invocation of hint may need to be nested
-		// inside another callback...		
+		// NOTE/HINT: This invocation of quit may need to be nested
+		// inside another callback. Make sure it is the last to be invoked..		
 	//	client.quit();			
 	// });
 });
