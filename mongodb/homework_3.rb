@@ -3,7 +3,7 @@
 # Create a client
 # client = ...
 
-# A. Update all movies with "NOT RATED" at the "rated" key to be "Pending rating"
+# A. Update all movies with "NOT RATED" at the "rated" key to be "Pending rating". The operation must be in-place and atomic.
 
 
 # B. Find a movie with your genre in imdb and insert it into your database with the fields listed in the hw description.
@@ -19,3 +19,6 @@
 
 # Example result when country is Hungary:
 #  => [{"_id"=>{"country"=>"Hungary", "rating"=>"Pending rating"}, "count"=>9}]
+
+
+# E. Create an example using the $lookup pipeline operator. See hw description for more info.
