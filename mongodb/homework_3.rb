@@ -18,7 +18,7 @@
 # D. Use the aggregation framework to find the number of movies made in the country you were born in with a rating of "Pending rating".
 
 # Example result when country is Hungary:
-#  => [{"_id"=>{"country"=>"Hungary", "rating"=>"Pending rating"}, "count"=>9}]
+#  => [{"_id"=>{"country"=>"Hungary", "rated"=>"Pending rating"}, "count"=>9}]
 
 
 # E. Create an example using the $lookup pipeline operator. See hw description for more info.
