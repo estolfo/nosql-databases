@@ -27,6 +27,7 @@ function install_nodejs() {
 function setup_python {
   apt-get update
   apt-get install -y python-pip
+  apt-get install -y python3-pip
 }
 
 install_nodejs

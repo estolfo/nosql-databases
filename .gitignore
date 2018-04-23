@@ -221,3 +221,6 @@ venv.bak/
 
 ########## REDIS #############
 *.rdb
+
+########## MONGODB #############
+mongodb/data
