@@ -1,7 +1,109 @@
-// The scenario you have used for your schema is:
+CREATE (n:Person { name: 'Harry Potter'});
+CREATE (n:Person { name: 'Sirius Black'});
+CREATE (n:Person { name: 'Ron Weasley'});
+CREATE (n:Person { name: 'Hermoine Granger'});
+CREATE (n:Person { name: 'Lord Voldemort'});
+CREATE (n:Person { name: 'Albus Dumbledore'});
+CREATE (n:Person { name: 'Draco Malfoy'});
+CREATE (n:Person { name: 'Rubeus Hagrid'});
+
+MATCH (a:Person),(b:Person)
+       WHERE a.name = 'Albus Dumbledore' AND b.name = 'Harry Potter'
+       CREATE (a)-[r:RELTYPE { name: "mentor_of" }]->(b)
+       RETURN type(r), r.name;
+
+MATCH (a:Person),(b:Person)
+       WHERE a.name = 'Lord Voldemort' AND b.name = 'Harry Potter'
+       CREATE (a)-[r:RELTYPE { name: "enemy_of" }]->(b)
+       RETURN type(r), r.name
+       ;
+
+MATCH (a:Person),(b:Person)
+       WHERE a.name = 'Ron Weasley' AND b.name = 'Harry Potter'
+       CREATE a.name = 'Harry Potter' AND b.name = 'Ron Weasley'
+       CREATE (a)-[r:RELTYPE { name: "friend_of" }]->(b)
+       RETURN type(r), r.name
+       ;
+       RETURN type(r), r.name
+       ;
+
+MATCH (a:Person),(b:Person)
+       WHERE a.name = 'Sirius Black' AND b.name = 'Harry Potter'
+       CREATE (a)-[r:RELTYPE { name: "Godfather_of" }]->(b)
+       RETURN type(r), r.name
+       ;
+
+MATCH (a:Person),(b:Person)
+       WHERE a.name = 'Draco Malfoy' AND b.name = 'Harry Potter'
+       CREATE (a)-[r:RELTYPE { name: "classmate_of" }]->(b)
+       RETURN type(r), r.name
+       ;
+
+MATCH (a:Person),(b:Person)
+       WHERE a.name = 'Rubeus Hagrid' AND b.name = 'Harry Potter'
+       CREATE (a)-[r:RELTYPE { name: "helper_of" }]->(b)
+       RETURN type(r), r.name
+       ;
+
+MATCH (a:Person),(b:Person)
+       WHERE a.name = 'Harry Potter' AND b.name = 'Lord Voldemort'
+       CREATE (a)-[r:RELTYPE { name: "part_of" }]->(b)
+       RETURN type(r), r.name
+       ;
+
+MATCH (a:Person),(b:Person)
+       WHERE a.name = 'Harry Potter' AND b.name = 'Ron Weasley'
+       CREATE (a)-[r:RELTYPE { name: "friend_of" }]->(b)
+       RETURN type(r), r.name
+       ;
+
+MATCH (a:Person),(b:Person)
+       WHERE a.name = 'Harry Potter' AND b.name = 'Sirius Black'
+       CREATE (a)-[r:RELTYPE { name: "protectee_of" }]->(b)
+       RETURN type(r), r.name
+       ;
+
+MATCH (a:Person),(b:Person)
+       WHERE a.name = 'Harry Potter' AND b.name = 'Draco Malfoy'
+       CREATE (a)-[r:RELTYPE { name: "enemy_of" }]->(b)
+       RETURN type(r), r.name
+       ;
+
+MATCH (a:Person),(b:Person)
+       WHERE a.name = 'Ron Weasley' AND b.name = 'Hermoine Granger'
+       CREATE (a)-[r:RELTYPE { name: "spouse_of" }]->(b)
+       RETURN type(r), r.name
+       ;
+
+MATCH (a:Person),(b:Person)
+       WHERE a.name = 'Hermoine Granger' AND b.name = 'Ron Weasley'
+       CREATE (a)-[r:RELTYPE { name: "spouse_of" }]->(b)
+       RETURN type(r), r.name
+       ;
+
+Subgraph 1:
+
+MATCH (n:Person)
+	USING INDEX n:Person(name)
+	WHERE n.name = 'Harry Potter'
+	WITH n
+MATCH (m:Person)
+        USING INDEX m:Person(name)
+        WHERE m.name = 'Lord Voldemort'
+        WITH m
+ MATCH (n) - [r] -> (m)
+       RETURN n.name, r, m.name;
 
 
-// This is an example. Your own commands should *not* be commented out so we can pipe the file into the cypher-shell.
-// If you'd like to test your commands, you can run 'cat homework_4.txt | cypher-shell -u neo4j -p test' from
-// the vagrant box command line. Make sure neo4j is running first.
-// CREATE (a:person { name: 't' });
+Subgraph 2:
+
+MATCH (n:Person)
+        USING INDEX n:Person(name)
+        WHERE n.name = 'Draco Malfoy'
+        WITH n
+MATCH (m:Person)
+        USING INDEX m:Person(name)
+        WHERE m.name = 'Harry Potter'
+        WITH m
+ MATCH (n) <- [r] - (m)
+       RETURN n.name, r, m.name;
